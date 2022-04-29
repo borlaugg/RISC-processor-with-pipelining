@@ -1,3 +1,2 @@
 # RISC-processor-with-pipelining
-EE 309 bonus assignment- RISC processor with pipelining. 
-[Project2-Bonus-RISC-IITB.pdf](https://github.com/borlaugg/RISC-processor-with-pipelining/files/8589359/Project2-Bonus-RISC-IITB.pdf)
+EE 309 bonus assignment- RISC processor with pipelining. The processor handles basic move, jump, arithmatic and logical expressions. This project was jointly done by Bhavya, Hemanth, Rishabh and Sameep.
