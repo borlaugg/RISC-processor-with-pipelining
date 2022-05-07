@@ -11,7 +11,7 @@ package Register16bit is
 			data_out:     OUT  std_logic_vector(15 downto 0)
 		);
 	END COMPONENT;
-end package Register16bit; 
+end package Register16bit 
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
