@@ -33,9 +33,12 @@ ARCHITECTURE rtl OF PC IS
 BEGIN
    PROCESS (clock)
    BEGIN
+	IF (clock' event) THEN
          IF (write_enable = '1') THEN
             pc_reg(0) <= data;
-			ELSIF (read_enable= '1') THEN
+	end if;
+       end if;
+			IF (read_enable= '1') THEN
 				data_out <= pc_reg(0);
 			END IF;
    END PROCESS;

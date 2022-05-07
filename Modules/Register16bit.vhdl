@@ -33,10 +33,13 @@ ARCHITECTURE rtl OF reg IS
 BEGIN
    PROCESS (clock)
    BEGIN
+		if(clock' event) then
          IF (write_enable = '1') THEN
             reg(0) <= data;
-			ELSIF (read_enable= '1') THEN
-				data_out <= reg(0);
-			END IF;
+			end if;
+		end if;
+		if (read_enable= '1') THEN
+			data_out <= reg(0);
+		END IF;
    END PROCESS;
 END rtl;
