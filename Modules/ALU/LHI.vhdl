@@ -25,8 +25,10 @@ ENTITY LHI IS
 END LHI;
 
 ARCHITECTURE rtl OF LHI IS
+signal op: std_logic_vector(15 downto 0);
 BEGIN
-   y(15 downto 8) <= a;
-	y(7 downto 0) <= "00000000";
-	z <= not ((0) or y(1) or y(2) or y(3) or y(4) or y(5) or y(6) or y(7) or y(8) or y(9) or y(10) or y(11) or y(12) or y(13) or y(14) or y(15));
+   op(15 downto 7) <= a;
+	op(6 downto 0) <= "0000000";
+	z <= not (op(0) or op(1) or op(2) or op(3) or op(4) or op(5) or op(6) or op(7) or op(8) or op(9) or op(10) or op(11) or op(12) or op(13) or op(14) or op(15));
+	y <= op;
 END rtl;

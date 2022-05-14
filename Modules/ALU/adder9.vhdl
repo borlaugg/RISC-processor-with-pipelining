@@ -18,14 +18,14 @@ use work.FullAdder.all;
 ENTITY adder9 IS
    PORT
    (
-		a, b:  IN   std_logic_vector(15 downto 0);
-		c,z: OUT std_logic;
+		a:  IN   std_logic_vector(15 downto 0);
+		imm : IN   std_logic_vector(8 downto 0);
 		y:     OUT  std_logic_vector(15 downto 0)
    );
 END entity adder9;
 
 ARCHITECTURE rtl OF adder9 IS
-signal C0,C1,C2,C3,C4,C5,C6, C7, C8, C9 ,C10, C11, C12, C13, C14,c: std_logic;
+signal C0,C1,C2,C3,C4,C5,C6, C7, C8, C9 ,C10, C11, C12, C13, C14,C15: std_logic;
 BEGIN
    fa0: full_adder port map(A =>a(0), B=>imm(0), Cin=>'0', S=>y(0), Cout=>C0);
 	fa1: full_adder port map(A =>a(1), B=>imm(1), Cin=>C0, S=>y(1), Cout=>C1);
@@ -42,5 +42,5 @@ BEGIN
 	fa12: full_adder port map(A =>a(12), B=>'0', Cin=>C11, S=>y(12), Cout=>C12);
 	fa13: full_adder port map(A =>a(13), B=>'0', Cin=>C12, S=>y(13), Cout=>C13);
 	fa14: full_adder port map(A =>a(14), B=>'0', Cin=>C13, S=>y(14), Cout=>C14);
-	fa15: full_adder port map(A =>a(15), B=>'0', Cin=>C14, S=>y(15), Cout=>c);
+	fa15: full_adder port map(A =>a(15), B=>'0', Cin=>C14, S=>y(15), Cout=>C15);
 END rtl;

@@ -16,7 +16,7 @@ end package MultipleAddress;
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 library work;
-use work.adder.all;
+use work.add16bit.all;
 ENTITY MultipleAdd IS
    PORT
    (
@@ -27,6 +27,7 @@ ENTITY MultipleAdd IS
 END MultipleAdd;
 
 ARCHITECTURE rtl OF MultipleAdd IS
+signal c0, z0 : std_logic;
 BEGIN
    add0: adder port map(a => a, b => "0000000000000000", c => c0, z=>z0, y => a0); 
 	add1: adder port map(a => a, b => "0000000000000001", c => c0, z=>z0, y => a1); 
