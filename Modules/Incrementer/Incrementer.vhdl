@@ -5,7 +5,7 @@ package Incrementer is
 		PORT
 		(
 			pc:  IN   std_logic_vector(15 downto 0);
-			enable:    IN   std_logic;
+			bp: IN std_logic;
 			data_out:     OUT  std_logic_vector(15 downto 0)
 		);
 	END COMPONENT;
@@ -19,7 +19,7 @@ ENTITY inc IS
    PORT
    (
 		pc:  IN   std_logic_vector(15 downto 0);
-		enable:    IN   std_logic;
+		bp: IN std_logic;
 		data_out:     OUT  std_logic_vector(15 downto 0)
    );
 END inc;
@@ -27,7 +27,7 @@ END inc;
 ARCHITECTURE rtl OF inc IS
 signal C0,C1,C2,C3,C4,C5,C6, C7, C8, C9 ,C10, C11, C12, C13, C14, C15: std_logic;
 BEGIN
-   fa0: full_adder port map(A =>pc(0), B=>enable, Cin=>'0', S=>data_out(0), Cout=>C0);
+   fa0: full_adder port map(A =>pc(0), B=>'1', Cin=>bp, S=>data_out(0), Cout=>C0);
 	fa1: full_adder port map(A =>pc(1), B=>'0', Cin=>C0, S=>data_out(1), Cout=>C1);
 	fa2: full_adder port map(A =>pc(2), B=>'0', Cin=>C1, S=>data_out(2), Cout=>C2);
 	fa3: full_adder port map(A =>pc(3), B=>'0', Cin=>C2, S=>data_out(3), Cout=>C3);

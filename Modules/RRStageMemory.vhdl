@@ -5,12 +5,12 @@ package RRStageMemory is
 		PORT
 		(
 			clock: IN std_logic;
-			a,b,pc_in, a0,a1,a2,a3,a4,a5,a6,y,r0,r1,r2,r3,r4,r5, r6:  IN   std_logic_vector(15 downto 0);
+			a,b,pc_in, a0,a1,a2,a3,a4,a5,a6,a7,y,r0,r1,r2,r3,r4,r5, r6,r7:  IN   std_logic_vector(15 downto 0);
 			imm6:  IN   std_logic_vector(5 downto 0);
 			imm9:  IN   std_logic_vector(8 downto 0);
 			yz:  IN   std_logic_vector(1 downto 0);
 			op:  IN   std_logic_vector(3 downto 0);
-			ao,bo,pc_out, ao0,ao1,ao2,ao3,ao4,ao5,ao6,yo,ro0,ro1,ro2,ro3,ro4,ro5, ro6:  OUT  std_logic_vector(15 downto 0);
+			ao,bo,pc_out, ao0,ao1,ao2,ao3,ao4,ao5,ao6,ao7,yo,ro0,ro1,ro2,ro3,ro4,ro5, ro6,ro7:  OUT  std_logic_vector(15 downto 0);
 			imm6o:  OUT   std_logic_vector(5 downto 0);
 			imm9o:  OUT   std_logic_vector(8 downto 0);
 			yzo:  OUT   std_logic_vector(1 downto 0);
@@ -26,12 +26,12 @@ ENTITY Rmem IS
    PORT
    (
 		clock: IN std_logic;
-		a,b,pc_in, a0,a1,a2,a3,a4,a5,a6,y,r0,r1,r2,r3,r4,r5, r6:  IN   std_logic_vector(15 downto 0);
+		a,b,pc_in, a0,a1,a2,a3,a4,a5,a6,a7,y,r0,r1,r2,r3,r4,r5, r6,r7:  IN   std_logic_vector(15 downto 0);
 		imm6:  IN   std_logic_vector(5 downto 0);
 		imm9:  IN   std_logic_vector(8 downto 0);
 		yz:  IN   std_logic_vector(1 downto 0);
 		op:  IN   std_logic_vector(3 downto 0);
-		ao,bo,pc_out, ao0,ao1,ao2,ao3,ao4,ao5,ao6,yo,ro0,ro1,ro2,ro3,ro4,ro5, ro6:  OUT  std_logic_vector(15 downto 0);
+		ao,bo,pc_out, ao0,ao1,ao2,ao3,ao4,ao5,ao6,ao7,yo,ro0,ro1,ro2,ro3,ro4,ro5, ro6,ro7:  OUT  std_logic_vector(15 downto 0);
 		imm6o:  OUT   std_logic_vector(5 downto 0);
 		imm9o:  OUT   std_logic_vector(8 downto 0);
 		yzo:  OUT   std_logic_vector(1 downto 0);
@@ -40,7 +40,7 @@ ENTITY Rmem IS
 END entity Rmem;
 
 ARCHITECTURE rtl OF Rmem IS
-   TYPE mem16 IS ARRAY(0 TO 17) OF std_logic_vector(15 downto 0);
+   TYPE mem16 IS ARRAY(0 TO 19) OF std_logic_vector(15 downto 0);
 	TYPE mem2 IS ARRAY(0 TO 0) OF std_logic_vector(1 downto 0);
 	TYPE mem9 IS ARRAY(0 TO 0) OF std_logic_vector(8 downto 0);
 	TYPE mem6 IS ARRAY(0 TO 0) OF std_logic_vector(5 downto 0);
@@ -62,16 +62,18 @@ BEGIN
 			reg(5) <= a4;
 			reg(6) <= a5;
 			reg(7) <= a6;
-			reg(8) <= y;
-			reg(9) <= r0;
-			reg(10) <= r1;
-			reg(11) <= r2;
-			reg(12) <= r3;
-			reg(13) <= r4;
-			reg(14) <= r5;
-			reg(15) <= r6;
-			reg(16) <= a;
-			reg(17) <= b;
+			reg(8) <= a7;
+			reg(9) <= y;
+			reg(10) <= r0;
+			reg(11) <= r1;
+			reg(12) <= r2;
+			reg(13) <= r3;
+			reg(14) <= r4;
+			reg(15) <= r5;
+			reg(16) <= r6;
+			reg(17) <= r7;
+			reg(18) <= a;
+			reg(19) <= b;
 			reg2(0) <= yz;
 			reg4(0) <= op;
 			reg6(0) <= imm6;
@@ -85,16 +87,18 @@ BEGIN
 		ao4 <= reg(5);
 		ao5 <= reg(6);
 		ao6 <= reg(7);
-		yo <= reg(8);
-		ro0<= reg(9);
-		ro1 <= reg(10);
-		ro2 <= reg(11);
-		ro3 <= reg(12);
-		ro4 <= reg(13);
-		ro5 <= reg(14);
-		ro6 <= reg(15);
-		ao <= reg(16);
-		bo <= reg(17);
+		ao7 <= reg(8);
+		yo <= reg(9);
+		ro0<= reg(10);
+		ro1 <= reg(11);
+		ro2 <= reg(12);
+		ro3 <= reg(13);
+		ro4 <= reg(14);
+		ro5 <= reg(15);
+		ro6 <= reg(16);
+		ro7 <= reg(17);
+		ao <= reg(18);
+		bo <= reg(19);
 		yzo <= reg2(0);
 		opo <= reg4(0);
 		imm6o <= reg6(0);

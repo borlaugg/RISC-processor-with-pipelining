@@ -4,7 +4,7 @@ package IFStageMemory is
 	COMPONENT IFmem IS
 		PORT
 		(
-			clock: IN std_logic;
+			pc_re, ir_re: IN std_logic;
 			pc_in, ir:  IN   std_logic_vector(15 downto 0);
 			pc_out, iro:  OUT  std_logic_vector(15 downto 0)
 		);
@@ -17,7 +17,7 @@ use ieee.numeric_std.all;
 ENTITY IFmem IS
    PORT
    (
-		clock: IN std_logic;
+		pc_re, ir_re: IN std_logic;
 		pc_in, ir:  IN   std_logic_vector(15 downto 0);
 		pc_out, iro:  OUT  std_logic_vector(15 downto 0)
    );
@@ -29,8 +29,10 @@ ARCHITECTURE rtl OF IFmem IS
 BEGIN
    PROCESS (clock)
    BEGIN
-		if(clock' event and clock = '1') then
+		if (pc_re= '1') then
 			reg(0) <= pc_in;
+		end if;
+		if(ir_re = '1') then
 			reg(1) <= ir;
 		end if;
 		pc_out <= reg(0);
