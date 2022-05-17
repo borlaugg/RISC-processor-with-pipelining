@@ -7,7 +7,7 @@ component MultipleAdd IS
    (
 		a:  IN   std_logic_vector(15 downto 0);
 		c,z: OUT std_logic;
-		a0,a1,a2,a3,a4,a5,a6:     OUT  std_logic_vector(15 downto 0)
+		a0,a1,a2,a3,a4,a5,a6,a7:     OUT  std_logic_vector(15 downto 0)
    );
 END component MultipleAdd;
 end package MultipleAddress;
@@ -22,7 +22,7 @@ ENTITY MultipleAdd IS
    (
 		a:  IN   std_logic_vector(15 downto 0);
 		c,z: OUT std_logic;
-		a0,a1,a2,a3,a4,a5,a6:     OUT  std_logic_vector(15 downto 0)
+		a0,a1,a2,a3,a4,a5,a6,a7:     OUT  std_logic_vector(15 downto 0)
    );
 END MultipleAdd;
 
@@ -36,4 +36,5 @@ BEGIN
 	add4: adder port map(a => a, b => "0000000000000100", c => c0, z=>z0, y => a4);
 	add5: adder port map(a => a, b => "0000000000000101", c => c0, z=>z0, y => a5);
 	add6: adder port map(a => a, b => "0000000000000110", c => c0, z=>z0, y => a6);
+	add7: adder port map(a => a, b => "0000000000000111", c => c0, z=>z0, y => a7);
 END rtl;

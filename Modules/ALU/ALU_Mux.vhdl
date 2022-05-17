@@ -62,7 +62,7 @@ begin
 	m6: mux16bit port map(a0 => a6_0, a1 => a6_1, a2 => a6_2, a3 => a6_3, a4 => a6_4, a5 => a6_5, a6 => a6_6,
 								a7 => a6_7, a8 => a6_8, a9 => a6_9, a10 => a6_10, a11 => a6_11, a12 => a6_12, a13 => a6_13, a14 => a6_14, a15 => a6_15, 
 								s => opcode, o => a6);
-	m7: mux16bit port map(a0 => a7_0, a1 => a7_1, a2 => a7_2, a3 => a7_3, a4 => a7_4, a5 => 7_5, a6 => a7_6,
+	m7: mux16bit port map(a0 => a7_0, a1 => a7_1, a2 => a7_2, a3 => a7_3, a4 => a7_4, a5 => a7_5, a6 => a7_6,
 								a7 => a7_7, a8 => a7_8, a9 => a7_9, a10 => a7_10, a11 => a7_11, a12 => a7_12, a13 => a7_13, a14 => a7_14, a15 => a7_15, 
 								s => opcode, o => a7);
 	m8: mux16bit port map(a0 => y_0, a1 => y_1, a2 => y_2, a3 => y_3, a4 => y_4, a5 => y_5, a6 => y_6,
