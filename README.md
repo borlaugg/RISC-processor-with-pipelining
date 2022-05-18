@@ -27,7 +27,7 @@ A Data Hazard unit has been made that signals if it detects a hazard which is us
 The branch predictor, present in `Modules/BranchPredictor.vhdl`  detects a branching instruction and calls for a stall for five clock cycles. The three cycles are for the branch instruction to finish execution stage and the last as a buffer to allow the program counter to read.
 <p align="center">
   <img 
-    width="600"
+    width="400"
     height="300"
     src="https://github.com/borlaugg/RISC-processor-with-pipelining/blob/main/docs/BP.png"
   >
