@@ -7,7 +7,7 @@ package Decoderpkg is
 			  bp,clock:in std_logic;
 			  yz: out std_logic_vector(1 downto 0);
 			  imm6: out std_logic_vector(5 downto 0);
-			  rf_rs, rf_ws: out std_logic_vector(7 downto 0);
+			  rf_a,rf_b,rf_rs, rf_ws: out std_logic_vector(7 downto 0);
 			  imm9: out std_logic_vector(8 downto 0);
 			  c_we, c_re, z_we, z_re, d_re0, d_we0,d_re1, d_we1,d_re2, d_we2,d_re3, 
 			  d_we3,d_re4, d_we4,d_re5, d_we5,d_re6, d_we6,d_we7,d_re7: out std_logic;
@@ -26,7 +26,7 @@ entity decoder is
 		  bp,clock:in std_logic;
 		  yz: out std_logic_vector(1 downto 0);
 		  imm6: out std_logic_vector(5 downto 0);
-		  rf_rs, rf_ws: out std_logic_vector(7 downto 0);
+		  rf_a,rf_b,rf_rs, rf_ws: out std_logic_vector(7 downto 0);
 		  imm9: out std_logic_vector(8 downto 0);
 		  c_we, c_re, z_we, z_re, d_re0, d_we0,d_re1, d_we1,d_re2, d_we2,d_re3, 
 		  d_we3,d_re4, d_we4,d_re5, d_we5,d_re6, d_we6,d_we7,d_re7: out std_logic;
@@ -78,6 +78,8 @@ decode:process(clock)
 					d_we7 <= '0';	
 					rf_rs <= rfb;
 					rf_ws <= rfa;
+					rf_a <= rfb;
+					rf_b <= "00000000";
 				when "0001"=> -- ADD
 					opcode <= op;
 					yz <= xy;
@@ -103,6 +105,8 @@ decode:process(clock)
 					d_we6 <= '0'; 
 					d_re7 <= '0'; 
 					d_we7 <= '0';
+					rf_a <= rfb;
+					rf_b <= rfc;
 					if( xy = "00") then
 						rf_rs(0) <= rfb(0) or rfc(0);
 						rf_rs(1) <= rfb(1) or rfc(1);
@@ -179,6 +183,8 @@ decode:process(clock)
 					d_we6 <= '0';
 					d_re7 <= '0'; 
 					d_we7 <= '0';
+					rf_a <= rfb;
+					rf_b <= rfc;
 						if( xy = "00") then
 							rf_rs(0) <= rfb(0) or rfc(0);
 							rf_rs(1) <= rfb(1) or rfc(1);
@@ -257,6 +263,8 @@ decode:process(clock)
 					rf_rs(6) <= rfb(6) or rfa(6);
 					rf_rs(7) <= rfb(7) or rfa(7);
 					rf_ws <= "00000000";
+					rf_a <= "00000000";
+					rf_b <= rfb;
 				when "0111"=> -- LW
 					opcode <= op;
 					yz <= "00";
@@ -284,6 +292,8 @@ decode:process(clock)
 					d_re7 <= rfa(7);
 					rf_rs <= rfb;
 					rf_ws <= rfa;
+					rf_a <= "00000000";
+					rf_b <= rfb;
 				when "1000"=> -- BEQ
 					opcode <= op;
 					yz <= "00";
@@ -318,6 +328,8 @@ decode:process(clock)
 					rf_rs(6) <= rfb(6) or rfa(6);
 					rf_rs(7) <= rfb(7) or rfa(7);
 					rf_ws <= "00000000";
+					rf_a <= rfa;
+					rf_b <= rfb;
 				when "1001"=> -- JAL
 					opcode <= op;
 					yz <= "00";
@@ -345,6 +357,8 @@ decode:process(clock)
 					d_we7 <= '0';
 					rf_rs <= "00000000";
 					rf_ws <= rfa;
+					rf_a <= "00000000";
+					rf_b <= "00000000";
 				when "1010"=> -- JLR
 					opcode <= op;
 					yz <= "00";
@@ -372,6 +386,8 @@ decode:process(clock)
 					d_we7 <= '0';
 					rf_rs <= rfb;
 					rf_ws <= rfa;
+					rf_a <= "00000000";
+					rf_b <= rfb;
 				when "1011"=> -- JRI
 					opcode <= op;
 					yz <= "00";
@@ -399,6 +415,37 @@ decode:process(clock)
 					d_we7 <= '0';
 					rf_rs <= rfa;
 					rf_ws <= "00000000";
+					rf_a <= rfa;
+					rf_b <= "00000000";
+				when "1100"=> -- LM
+					opcode <= op;
+					yz <= "00";
+					imm6 <= "000000";
+					imm9 <="000000000";
+					c_we <= '0';
+					z_we <= '0';
+					c_re <= '0';
+					z_re <= '0';
+					d_we0 <= instruction(0);
+					d_re0 <= '0';
+					d_we1 <= instruction(1);
+					d_re1 <= '0';
+					d_we2 <= instruction(2);
+					d_re2 <= '0';
+					d_we3 <= instruction(3); 
+					d_re3 <= '0';
+					d_we4 <= instruction(4);
+					d_re4 <= '0';
+					d_we5 <= instruction(5); 
+					d_re5 <= '0';
+					d_we6 <= instruction(6); 
+					d_re6 <= '0'; 
+					d_we7 <= instruction(7); 
+					d_re7 <= '0';
+					rf_rs <= rfa;
+					rf_ws <= instruction(7 downto 0);
+					rf_a <= rfa;
+					rf_b <= "00000000";
 				when "1101"=> -- SM
 					opcode <= op;
 					yz <= "00";
@@ -426,6 +473,8 @@ decode:process(clock)
 					d_we7 <= '0';
 					rf_rs <= rfa;
 					rf_ws <= instruction(7 downto 0);
+					rf_a <= rfa;
+					rf_b <= "00000000";
 				when "1111"=> --LHI
 					opcode <= op;
 					yz <= "00";
@@ -453,6 +502,8 @@ decode:process(clock)
 					d_we7 <= '0';	
 					rf_rs <= "00000000";
 					rf_ws <= rfa;
+					rf_a <= "00000000";
+					rf_b <= "00000000";
 				when others =>
 					opcode <= "0000";
 					yz <= "00";
@@ -480,6 +531,8 @@ decode:process(clock)
 					d_we7 <= '0';	
 					rf_rs <= "00000000";
 					rf_ws <= "00000000";
+					rf_a <= "00000000";
+					rf_b <= "00000000";
 			end case;
 		end if;
 	end process;
