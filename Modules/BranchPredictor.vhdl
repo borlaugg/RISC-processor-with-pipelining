@@ -26,7 +26,7 @@ begin
 		if(clock' event and clock='1') then
 			Prediction <= check;
 			if (check='1' ) then
-				Prediction <= '0' after 2500ns;
+				Prediction <= '0' after 2000ns;
 			end if;
 		end if;
 	end process;
