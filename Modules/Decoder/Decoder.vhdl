@@ -534,6 +534,35 @@ decode:process(clock)
 					rf_a <= "00000000";
 					rf_b <= "00000000";
 			end case;
+			elsif(clock' event and clock= '1' and bp ='1') then
+				opcode <= "0000";
+					yz <= "00";
+					imm6 <= "000000";
+					imm9 <="000000000";
+					c_we <= '0';
+					z_we <= '0';
+					c_re <= '0';
+					z_re <= '0';
+					d_re0 <= '0';
+					d_we0 <= '0';
+					d_re1 <= '0';
+					d_we1 <= '0';
+					d_re2 <= '0';
+					d_we2 <= '0';
+					d_re3 <= '0'; 
+					d_we3 <= '0';
+					d_re4 <= '0';
+					d_we4 <= '0';
+					d_re5 <= '0'; 
+					d_we5 <= '0';
+					d_re6 <= '0'; 
+					d_we6 <= '0';
+					d_re7 <= '0'; 
+					d_we7 <= '0';	
+					rf_rs <= "00000000";
+					rf_ws <= "00000000";
+					rf_a <= "00000000";
+					rf_b <= "00000000";
 		end if;
 	end process;
 
