@@ -6,7 +6,7 @@ package ExecStageMemory is
 		(
 			clock: IN std_logic;
 			pc_in, a0,a1,a2,a3,a4,a5,a6,y,r0,r1,r2,r3,r4,r5, r6,r7:  IN   std_logic_vector(15 downto 0);
-			pc_out, ao0,ao1,ao2,ao3,ao4,ao5,ao6,ao6,yo,ro0,ro1,ro2,ro3,ro4,ro5, ro6,ro7:  OUT  std_logic_vector(15 downto 0)
+			pc_out, ao0,ao1,ao2,ao3,ao4,ao5,ao6,ao6,ao7,yo,ro0,ro1,ro2,ro3,ro4,ro5, ro6,ro7:  OUT  std_logic_vector(15 downto 0)
 		);
 	END COMPONENT;
 end package ExecStageMemory; 
@@ -57,7 +57,7 @@ BEGIN
 		ao4 <= reg(5);
 		ao5 <= reg(6);
 		ao6 <= reg(7);
-		ao8 <= reg(8);
+		ao7 <= reg(8);
 		yo <= reg(9);
 		ro0<= reg(10);
 		ro1 <= reg(11);
