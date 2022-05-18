@@ -6,13 +6,13 @@ package RRStageMemory is
 		(
 			c_we,c_re,z_re,z_we,d_re0, d_we0,d_re1, d_we1,d_re2, d_we2,d_re3, 
 			d_we3,d_re4, d_we4,d_re5, d_we5,d_re6, d_we6,d_re7,d_we7,clock: IN std_logic;
-			rf_ws,rf_a,rf_b : IN std_logic_vector(7 downto 0);
+			rf_rs,rf_ws,rf_a,rf_b : IN std_logic_vector(7 downto 0);
 			pc_in, a0,a1,a2,a3,a4,a5,a6,a7,y,r0,r1,r2,r3,r4,r5, r6,r7:  IN   std_logic_vector(15 downto 0);
 			imm6:  IN   std_logic_vector(5 downto 0);
 			imm9:  IN   std_logic_vector(8 downto 0);
 			yz:  IN   std_logic_vector(1 downto 0);
 			op:  IN   std_logic_vector(3 downto 0);
-			orf_ws,orf_a,orf_b : OUT std_logic_vector(7 downto 0);
+			orf_rs,orf_ws,orf_a,orf_b : OUT std_logic_vector(7 downto 0);
 			pc_out, ao0,ao1,ao2,ao3,ao4,ao5,ao6,ao7,yo,ro0,ro1,ro2,ro3,ro4,ro5, ro6,ro7:  OUT  std_logic_vector(15 downto 0);
 			imm6o:  OUT   std_logic_vector(5 downto 0);
 			imm9o:  OUT   std_logic_vector(8 downto 0);
@@ -32,13 +32,13 @@ ENTITY Rmem IS
    (
 		c_we,c_re,z_re,z_we,d_re0, d_we0,d_re1, d_we1,d_re2, d_we2,d_re3, 
 		d_we3,d_re4, d_we4,d_re5, d_we5,d_re6, d_we6,d_re7,d_we7,clock: IN std_logic;
-		rf_ws,rf_a,rf_b : IN std_logic_vector(7 downto 0);
+		rf_rs,rf_ws,rf_a,rf_b : IN std_logic_vector(7 downto 0);
 		pc_in, a0,a1,a2,a3,a4,a5,a6,a7,y,r0,r1,r2,r3,r4,r5, r6,r7:  IN   std_logic_vector(15 downto 0);
 		imm6:  IN   std_logic_vector(5 downto 0);
 		imm9:  IN   std_logic_vector(8 downto 0);
 		yz:  IN   std_logic_vector(1 downto 0);
 		op:  IN   std_logic_vector(3 downto 0);
-		orf_ws,orf_a,orf_b : OUT std_logic_vector(7 downto 0);
+		orf_rs,orf_ws,orf_a,orf_b : OUT std_logic_vector(7 downto 0);
 		pc_out, ao0,ao1,ao2,ao3,ao4,ao5,ao6,ao7,yo,ro0,ro1,ro2,ro3,ro4,ro5, ro6,ro7:  OUT  std_logic_vector(15 downto 0);
 		imm6o:  OUT   std_logic_vector(5 downto 0);
 		imm9o:  OUT   std_logic_vector(8 downto 0);
@@ -55,7 +55,7 @@ ARCHITECTURE rtl OF Rmem IS
 	TYPE mem9 IS ARRAY(0 TO 0) OF std_logic_vector(8 downto 0);
 	TYPE mem6 IS ARRAY(0 TO 0) OF std_logic_vector(5 downto 0);
 	TYPE mem4 IS ARRAY(0 TO 0) OF std_logic_vector(3 downto 0);
-	TYPE mem8 IS ARRAY(0 TO 2) OF std_logic_vector(7 downto 0);
+	TYPE mem8 IS ARRAY(0 TO 3) OF std_logic_vector(7 downto 0);
 	TYPE mem1 IS ARRAY(0 TO 19) OF std_logic;
    SIGNAL reg : mem16;
 	SIGNAL reg1 : mem1;
@@ -69,8 +69,9 @@ BEGIN
    BEGIN
 		if(clock' event and clock = '1') then
 			reg8(0) <= rf_ws;
-			reg8(1) <= rf_a;
-			reg8(2) <= rf_b;
+			reg8(1) <= rf_rs;
+			reg8(2) <= rf_a;
+			reg8(3) <= rf_b;
 			reg(0) <= pc_in;
 			reg(1) <= a0;
 			reg(2) <= a1;
@@ -115,8 +116,9 @@ BEGIN
 			reg1(19) <= d_we7;
 		end if;
 		orf_ws <= reg8(0);
-		orf_a <= reg8(1);
-		orf_b <= reg8(2);
+		orf_rs <= reg8(1);
+		orf_a <= reg8(2);
+		orf_b <= reg8(3);
 		pc_out <= reg(0);
 		ao0 <= reg(1);
 		ao1 <= reg(2);
