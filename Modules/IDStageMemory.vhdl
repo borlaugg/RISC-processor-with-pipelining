@@ -9,11 +9,13 @@ component IDMem is
 		  imm9 : IN std_logic_vector(8 downto 0);
 		  c_we,c_re,z_re,z_we,d_re0, d_we0,d_re1, d_we1,d_re2, d_we2,d_re3, 
 		  d_we3,d_re4, d_we4,d_re5, d_we5,d_re6, d_we6,d_re7,d_we7,clock: IN std_logic;
+		  pc: IN std_logic_vector(15 downto 0);
 		  orf_ws,orf_rs,orf_a,orf_b : OUT std_logic_vector(7 downto 0);
 		  oopcode : OUT std_logic_vector(3 downto 0);
 		  oyz : OUT std_logic_vector(1 downto 0);
 		  oimm6 : OUT std_logic_vector(5 downto 0);
 		  oimm9 : OUT std_logic_vector(8 downto 0);
+		  pco: OUT std_logic_vector(15 downto 0);
 		  oc_we,oc_re,oz_re,oz_we,od_re0, od_we0,od_re1, od_we1,od_re2, od_we2,od_re3, 
 		  od_we3,od_re4, od_we4,od_re5, od_we5,od_re6, od_we6,od_re7,od_we7: OUT std_logic);
 end component;
@@ -29,11 +31,13 @@ port(rf_ws,rf_rs,rf_a,rf_b : IN std_logic_vector(7 downto 0);
 	  imm9 : IN std_logic_vector(8 downto 0);
 	  c_we,c_re,z_re,z_we,d_re0, d_we0,d_re1, d_we1,d_re2, d_we2,d_re3, 
 	  d_we3,d_re4, d_we4,d_re5, d_we5,d_re6, d_we6,d_re7,d_we7,clock: IN std_logic;
+	  pc: IN std_logic_vector(15 downto 0);
 	  orf_ws,orf_rs,orf_a,orf_b : OUT std_logic_vector(7 downto 0);
 	  oopcode : OUT std_logic_vector(3 downto 0);
 	  oyz : OUT std_logic_vector(1 downto 0);
 	  oimm6 : OUT std_logic_vector(5 downto 0);
 	  oimm9 : OUT std_logic_vector(8 downto 0);
+	  pco: OUT std_logic_vector(15 downto 0);
 	  oc_we,oc_re,oz_re,oz_we,od_re0, od_we0,od_re1, od_we1,od_re2, od_we2,od_re3, 
 	  od_we3,od_re4, od_we4,od_re5, od_we5,od_re6, od_we6,od_re7,od_we7: OUT std_logic);
 end entity;
@@ -45,12 +49,14 @@ ARCHITECTURE rtl OF IDMem IS
 	TYPE mem6 IS ARRAY(0 TO 0) OF std_logic_vector(5 downto 0);
 	TYPE mem9 IS ARRAY(0 TO 0) OF std_logic_vector(8 downto 0);
 	TYPE mem1 IS ARRAY(0 TO 19) OF std_logic;
+	TYPE mem15 IS ARRAY(0 TO 0) OF std_logic_vector(15 downto 0);
    SIGNAL reg : mem1;
    SIGNAL reg9 : mem9;
    SIGNAL reg6 : mem6;
    SIGNAL reg2 : mem2;
 	SIGNAL reg8 : mem8;
 	SIGNAL reg4 : mem4;
+	SIGNAL reg15 : mem15;
 BEGIN
    PROCESS (clock)
    BEGIN
@@ -83,7 +89,7 @@ BEGIN
 			reg(17) <= d_we6;
 			reg(18) <= d_re7;
 			reg(19) <= d_we7;
-			
+			reg15(0) <= pc;
 		end if;
 		orf_ws <= reg8(0);
 		orf_rs <= reg8(1);
@@ -113,5 +119,6 @@ BEGIN
 		od_we6 <= reg(17);
 		od_re7 <= reg(18);
 		od_we7 <= reg(19);
+		pco <= reg15(0);
    END PROCESS;
 END rtl;

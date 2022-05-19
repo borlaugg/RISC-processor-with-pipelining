@@ -5,7 +5,7 @@ package DM is
 		PORT
 		(
 			clock: IN   std_logic;
-			data1,data2,data3,data4,data5,data6,data7:  IN   std_logic_vector (15 DOWNTO 0);
+			data0,data1,data2,data3,data4,data5,data6,data7:  IN   std_logic_vector (15 DOWNTO 0);
 			write_address0:  IN   std_logic_vector (15 DOWNTO 0);
 			read_address0:  IN   std_logic_vector (15 DOWNTO 0);
 			write_enable0:    IN   std_logic;
@@ -45,7 +45,7 @@ package DM is
 			data_out4:     OUT  std_logic_vector (15 DOWNTO 0);
 			data_out5:     OUT  std_logic_vector (15 DOWNTO 0);
 			data_out6:     OUT  std_logic_vector (15 DOWNTO 0);
-			data_out7:     OUT  std_logic_vector (15 DOWNTO 0);
+			data_out7:     OUT  std_logic_vector (15 DOWNTO 0)
 		);
 	END COMPONENT;
 end package DM;
@@ -57,7 +57,7 @@ ENTITY RAM IS
    PORT
    (
       clock: IN   std_logic;
-      data1,data2,data3,data4,data5,data6,data7:  IN   std_logic_vector (15 DOWNTO 0);
+      data0,data1,data2,data3,data4,data5,data6,data7:  IN   std_logic_vector (15 DOWNTO 0);
 		write_address0:  IN   std_logic_vector (15 DOWNTO 0);
 		read_address0:  IN   std_logic_vector (15 DOWNTO 0);
       write_enable0:    IN   std_logic;
@@ -97,20 +97,23 @@ ENTITY RAM IS
 		data_out4:     OUT  std_logic_vector (15 DOWNTO 0);
 		data_out5:     OUT  std_logic_vector (15 DOWNTO 0);
 		data_out6:     OUT  std_logic_vector (15 DOWNTO 0);
-		data_out7:     OUT  std_logic_vector (15 DOWNTO 0);
+		data_out7:     OUT  std_logic_vector (15 DOWNTO 0)
    );
 END RAM;
 ARCHITECTURE rtl OF RAM IS
-   TYPE mem IS ARRAY(0 TO 65536) OF std_logic_vector(15 DOWNTO 0);
+   TYPE mem IS ARRAY(0 TO 100) OF std_logic_vector(15 DOWNTO 0);
    SIGNAL ram_block : mem;
 BEGIN
    PROCESS (clock)
    BEGIN
       IF (clock'event AND clock = '1') THEN
          IF (write_enable0 = '1') THEN
-            ram_block(to_integer(unsigned(write_address0))) <= data1;
+            ram_block(to_integer(unsigned(write_address0))) <= data0;
 			END IF;
 			IF (write_enable1 = '1') THEN
+            ram_block(to_integer(unsigned(write_address1))) <= data1;
+			END IF;
+			IF (write_enable2 = '1') THEN
             ram_block(to_integer(unsigned(write_address2))) <= data2;
 			END IF;
 			IF (write_enable3 = '1') THEN
