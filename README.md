@@ -6,8 +6,7 @@ Developed during the Spring 2022 Microprocessor course at IITB, this project is 
 The problem statement is available as a pdf in `docs/Project2-Bonus-RISC-IITB.pdf`
 
 
-
-There are five pipeline stages: 
+ 
 
 ## Under the hood
 
